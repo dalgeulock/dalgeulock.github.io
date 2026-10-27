@@ -7,7 +7,8 @@
 - 피그마 원본: https://www.figma.com/design/hzlLLecnCStnVFEUHrllo6/Untitled?node-id=0-1
 - 지금까지 한 일: [과정/작업 기록.md](과정/작업%20기록.md)
 - 팀원이 직접 고치는 법: 슬라이드 https://dalgeulock.github.io/guide.html (같은 내용 PDF: `달그락 사이트 안내.pdf`), 글로 된 [팀원 수정 가이드.md](팀원%20수정%20가이드.md)
-- 다른 맥북에서 클로드 코드로 이어 할 때: [다음 세션 프롬프트.md](다음%20세션%20프롬프트.md)
+- AI에게 부탁할 때 붙여 넣을 말: [다음 세션 프롬프트.md](다음%20세션%20프롬프트.md)
+- AI가 지킬 규칙: [CLAUDE.md](CLAUDE.md) (클로드가 자동으로 읽어요. 다른 AI는 [AGENTS.md](AGENTS.md))
 
 ## 바로 보기
 
