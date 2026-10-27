@@ -3,16 +3,17 @@
 무중력 환경의 식사 경험을 위한 식기 디자인 졸업작품 「달그락(DAL GEU LOCK)」의 아카이브 사이트예요.
 피그마 6개 화면(HOME·ABOUT·RESEARCH·EXPERIMENT·DESIGN·BRAND)을 웹으로 옮기고 인터랙션을 걸었어요.
 
-- 사이트: https://hoonlamb.github.io/dalgeulock-web/
+- 사이트: https://dalgeulock.github.io/
 - 피그마 원본: https://www.figma.com/design/hzlLLecnCStnVFEUHrllo6/Untitled?node-id=0-1
 - 지금까지 한 일: [과정/작업 기록.md](과정/작업%20기록.md)
+- 팀원이 직접 고치는 법: [팀원 수정 가이드.md](팀원%20수정%20가이드.md)
 - 다른 맥북에서 클로드 코드로 이어 할 때: [다음 세션 프롬프트.md](다음%20세션%20프롬프트.md)
 
 ## 바로 보기
 
 ```bash
-git clone https://github.com/hoonlamb/dalgeulock-web.git
-cd dalgeulock-web
+git clone https://github.com/dalgeulock/dalgeulock.github.io.git
+cd dalgeulock.github.io
 python3 -m http.server 4897
 ```
 
@@ -38,6 +39,8 @@ python3 -m http.server 4897
 2. **피그마 디자인이 바뀌었을 때:** 피그마 MCP로 해당 프레임 코드를 다시 뽑아 `과정/jsx/`에 덮어써요. 그다음 `python3 과정/convert.py .`, `python3 과정/build.py`를 차례로 실행해요.
    - 피그마 MCP의 이미지 주소는 7일 뒤 만료돼요. 새로 뽑은 코드로 convert.py를 돌려야 새 이미지가 내려받아져요.
 3. 고친 뒤 `git push` 하면 1~2분 뒤 사이트에 반영돼요.
+   - `과정/` 아래 파일이 바뀌면 깃허브가 `index.html`을 자동으로 다시 만들어요(`.github/workflows/build.yml`).
+   - 그래서 깃허브 웹에서 `과정/jsx/` 글자만 고쳐도 사이트에 반영돼요.
 
 ## 인터랙션 목록
 

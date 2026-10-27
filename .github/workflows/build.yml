@@ -1,0 +1,45 @@
+# 과정/ 아래(화면 코드·스타일·스크립트)를 고쳐 올리면 index.html 을 다시 만들어 저장소에 넣어요.
+# 그러면 깃허브 Pages 가 새 index.html 로 사이트를 다시 배포해요.
+name: 사이트 다시 만들기
+
+on:
+  push:
+    branches: [main]
+    paths: ['과정/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 화면 코드 → HTML, 이미지 내려받기
+        run: python3 과정/convert.py .
+      - name: index.html 만들기
+        run: python3 과정/build.py
+      - name: 바뀐 결과 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets 과정/pages.json
+          if git diff --cached --quiet; then
+            echo "바뀐 게 없어요"
+            exit 0
+          fi
+          git commit -m "사이트 다시 만들기 (${GITHUB_SHA::7})"
+          git push
+      - name: 배포 요청
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" || true
