@@ -332,8 +332,8 @@
   function show(k) {
     Object.values(pages).forEach(p => p.classList.toggle('on', p === pages[k]));
     current = k;
-    setup(k);
-    reveal(k);
+    // 움직임 준비에서 오류가 나도 화면은 그대로 보이게
+    try { setup(k); reveal(k); } catch (err) { console.error(err); }
     navLinks.forEach(a => a.classList.toggle('on', a.dataset.k === k));
     placeInd(activeLink());
     document.title = k === 'home' ? '달그락 · DAL GEU LOCK' : `${k.toUpperCase()} · 달그락`;
@@ -389,9 +389,13 @@
   addEventListener('popstate', () => go(parseHash(), {}, false));
   function parseHash() { const m = location.hash.match(/#\/?(\w+)/); return m ? m[1] : 'home'; }
 
+  // 글꼴을 기다리되, 늦어도 1초 뒤에는 무조건 시작
+  let started = false;
   const start = () => {
+    if (started) return;
+    started = true;
     show(pages[parseHash()] ? parseHash() : 'home');
-    requestAnimationFrame(() => document.body.classList.remove('booting'));
   };
-  if (document.fonts?.ready) document.fonts.ready.then(start); else addEventListener('load', start);
+  document.fonts?.ready.then(start);
+  setTimeout(start, 1000);
 })();

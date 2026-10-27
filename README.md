@@ -17,7 +17,7 @@ cd dalgeulock.github.io
 python3 -m http.server 4897
 ```
 
-브라우저에서 http://localhost:4897 을 열어요. 글꼴(Noto Sans KR)과 Tailwind를 인터넷에서 불러오니 인터넷 연결이 필요해요.
+브라우저에서 http://localhost:4897 을 열어요. 글꼴(Noto Sans KR)만 인터넷에서 불러와요. 인터넷이 없으면 맥 기본 글꼴로 보여요.
 
 ## 폴더 구조
 
@@ -31,7 +31,7 @@ python3 -m http.server 4897
 | `과정/jsx/` | 피그마 MCP가 뽑아 준 화면 코드 원본 6개 |
 | `과정/pages.json` | jsx를 HTML로 바꾼 결과 (convert.py가 만듦) |
 | `과정/convert.py` | jsx → HTML 변환 + 이미지 내려받기 |
-| `과정/build.py` | 껍데기 + CSS + JS + 화면을 합쳐 `index.html` 만들기 |
+| `과정/build.py` | 껍데기 + CSS + JS + 화면을 합쳐 `index.html` 만들기 (Tailwind를 미리 구워 넣어서 node가 필요해요) |
 
 ## 고치는 순서
 

@@ -19,8 +19,6 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-body.booting { opacity: 0; }
-body { transition: opacity .4s var(--e); }
 
 /* 헤더: 피그마 1080 좌표 그대로, 화면 폭에 맞춰 확대 */
 #hd {
