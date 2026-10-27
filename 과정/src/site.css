@@ -1,0 +1,135 @@
+:root {
+  --z: 1;
+  --e: cubic-bezier(.2, .8, .2, 1);
+  --ink: #f2f3f1;
+  --mute: #8a9099;
+  --dim: #5a616b;
+  --red: #d9566a;
+  --teal: #5ce5c3;
+  --bg: #090a0d;
+  --surface: #11141a;
+  --line: #1e232b;
+}
+html { background: var(--bg); scroll-behavior: auto; color-scheme: dark; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans KR", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body.booting { opacity: 0; }
+body { transition: opacity .4s var(--e); }
+
+/* 헤더: 피그마 1080 좌표 그대로, 화면 폭에 맞춰 확대 */
+#hd {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  background: rgba(17, 20, 26, .94);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  view-transition-name: site-header;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.hd-in { position: relative; width: 1080px; height: 75px; margin: 0 auto; zoom: var(--z); }
+.hd-in a, .hd-in span { position: absolute; white-space: nowrap; text-decoration: none; }
+.hd-logo {
+  left: 80px; top: 29px; font-size: 11px; line-height: 20px; font-weight: 500;
+  letter-spacing: 2.64px; color: var(--ink);
+  transition: letter-spacing .5s var(--e), color .3s;
+}
+.hd-logo:hover { color: var(--teal); }
+.hd-nav a, .hd-nav span {
+  top: 31px; font-size: 10px; line-height: 19px; letter-spacing: 1px; color: var(--mute);
+  transition: color .3s, translate .4s var(--e);
+}
+.hd-nav a:hover, .hd-nav span:hover { color: var(--ink); }
+.hd-nav a.on { color: var(--ink); font-weight: 500; }
+.hd-nav .soon { cursor: default; }
+.hd-nav .soon::after {
+  content: "준비 중이에요"; position: absolute; left: 0; top: 22px;
+  font-size: 8px; letter-spacing: .4px; color: var(--dim);
+  opacity: 0; translate: 0 -4px; transition: opacity .3s, translate .4s var(--e);
+}
+.hd-nav .soon:hover::after { opacity: 1; translate: 0 0; }
+.hd-ind {
+  position: absolute; top: 52px; height: 1px; background: var(--red);
+  transition: left .55s var(--e), width .55s var(--e), opacity .3s;
+  view-transition-name: nav-ind;
+}
+.hd-nav a:focus-visible, .hit:focus-visible, .hd-logo:focus-visible { outline: 1px solid var(--teal); outline-offset: 4px; }
+
+/* 페이지 */
+.page { display: none; }
+.page.on { display: block; }
+.frame { position: relative; width: 1080px; margin: 0 auto; overflow: hidden; zoom: var(--z); }
+.frame > div { position: relative; }
+.gone { display: none !important; }
+
+/* 공통 움직임 */
+.fx {
+  transition:
+    opacity .8s var(--e), translate .6s var(--e), transform .6s var(--e),
+    color .3s ease, background-color .35s ease, border-color .35s ease,
+    letter-spacing .45s var(--e), filter .35s ease;
+}
+.rv { opacity: 0; translate: 0 10px; }
+.rv.in { opacity: 1; translate: 0 0; }
+.rv.in.hot { translate: 0 -2px; }
+.hot-bg { background-color: #161a22 !important; }
+.hot-line { background-color: var(--red) !important; }
+.hot-ink, .hot-ink p { color: var(--ink) !important; }
+.hot-red, .hot-red p { color: var(--red) !important; }
+.hot-teal, .hot-teal p { color: var(--teal) !important; }
+.hot-push { translate: 4px 0 !important; }
+.zoomable { overflow: hidden; }
+.zoomable img { transition: transform .9s var(--e), filter .5s ease; }
+.zoomable.hot-img img { filter: brightness(1.06); }
+
+/* 누를 수 있는 영역 */
+.hit {
+  position: absolute; z-index: 40; display: block; cursor: pointer;
+  background: transparent; border: 0; padding: 0; text-decoration: none;
+}
+
+/* 홈 히어로: 떠 있는 지구와 손글씨 로고 */
+@keyframes drift { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px); } }
+@keyframes drift2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.float-earth { animation: drift 8s ease-in-out infinite; }
+.float-logo { animation: drift2 6.5s ease-in-out infinite; }
+
+/* 도면 콜아웃 링 */
+.ring {
+  position: absolute; width: 25px; height: 25px; border-radius: 50%;
+  border: 1px solid var(--teal); box-shadow: 0 0 0 4px rgba(92, 229, 195, .12);
+  pointer-events: none;
+  transition: left .6s var(--e), top .6s var(--e);
+}
+.hl { border-color: var(--teal) !important; opacity: 1 !important; }
+.callout-dim { opacity: .45; }
+
+/* 알림 */
+#toast {
+  position: fixed; left: 50%; bottom: 32px; z-index: 200;
+  translate: -50% 16px; opacity: 0; pointer-events: none;
+  padding: 11px 18px; border-radius: 999px;
+  background: #1a1e26; border: 1px solid #2a303a; color: var(--ink);
+  font-size: 13px; letter-spacing: -.1px;
+  transition: opacity .3s ease, translate .5s var(--e);
+}
+#toast.on { opacity: 1; translate: -50% 0; }
+
+/* 페이지 전환: 같은 요소는 이어서 움직이고, 나머지는 겹쳐 바뀜 */
+::view-transition-group(*) { animation-duration: .68s; animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+::view-transition-old(root) { animation: vt-out .32s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-in .6s cubic-bezier(.2, .8, .2, 1) .06s both; }
+::view-transition-old(hero-title), ::view-transition-new(hero-title),
+::view-transition-old(morph), ::view-transition-new(morph) { animation-duration: .68s; height: 100%; object-fit: cover; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(12px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; translate: none; }
+  .float-earth, .float-logo { animation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
