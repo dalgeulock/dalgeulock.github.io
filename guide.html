@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<title>달그락 사이트 안내</title>
+<style>
+:root {
+  --bg: #f4f5f3;
+  --paper: #ffffff;
+  --ink: #16191f;
+  --sub: #5d6470;
+  --line: #e1e4e0;
+  --go: #0e8f73;
+  --go-soft: #e3f4ef;
+  --stop: #c8455a;
+  --stop-soft: #fbe9ec;
+  --gh-green: #1f883d;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); }
+body {
+  font-family: Pretendard, "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+  color: var(--ink); -webkit-font-smoothing: antialiased; word-break: keep-all;
+}
+.card { width: 1080px; height: 1350px; padding: 80px 84px 64px; display: none; flex-direction: column; gap: 30px; background: var(--bg); }
+.card.on { display: flex; }
+.top { display: flex; justify-content: space-between; font-size: 26px; color: var(--sub); font-weight: 500; }
+h1 { margin: 0; font-size: 66px; line-height: 1.22; font-weight: 800; letter-spacing: -1.6px; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--go); }
+.lead { margin: -12px 0 0; font-size: 34px; line-height: 1.5; color: var(--sub); font-weight: 500; }
+.box { background: var(--paper); border: 2px solid var(--line); border-radius: 28px; padding: 40px 44px; }
+.steps { display: flex; flex-direction: column; gap: 18px; }
+.step { display: grid; grid-template-columns: 76px 1fr; gap: 26px; align-items: start; background: var(--paper); border: 2px solid var(--line); border-radius: 28px; padding: 26px 34px; }
+.num { width: 76px; height: 76px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 38px; font-weight: 800; display: grid; place-items: center; }
+.step b, .say b { font-weight: 800; }
+.step p { margin: 0; font-size: 36px; line-height: 1.45; font-weight: 600; }
+.step small { display: block; margin-top: 8px; font-size: 28px; line-height: 1.45; color: var(--sub); font-weight: 500; }
+.fill { flex: 1; }
+.foot { font-size: 26px; color: var(--sub); }
+.tag { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 26px; font-weight: 700; background: var(--go-soft); color: var(--go); }
+.tag.stop { background: var(--stop-soft); color: var(--stop); }
+.say { background: var(--paper); border: 2px solid var(--go); border-radius: 28px; padding: 24px 34px; font-size: 34px; line-height: 1.5; font-weight: 600; }
+.say .who { display: block; font-size: 26px; color: var(--go); font-weight: 800; margin-bottom: 8px; }
+.row { display: flex; gap: 22px; }
+.row > * { flex: 1; min-width: 0; }
+.big { font-size: 40px; line-height: 1.4; font-weight: 700; margin: 0; }
+.mid { font-size: 32px; line-height: 1.5; margin: 0; font-weight: 500; }
+.sub { color: var(--sub); }
+.door { background: var(--paper); border: 2px solid var(--line); border-radius: 28px; padding: 30px 36px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; }
+.door p { margin: 0; font-size: 36px; font-weight: 700; line-height: 1.35; }
+.door p span { display: block; font-size: 28px; color: var(--sub); font-weight: 500; margin-top: 6px; }
+.door .go { font-size: 30px; font-weight: 800; color: #fff; background: var(--go); padding: 14px 26px; border-radius: 999px; white-space: nowrap; }
+.mono { font-family: "SF Mono", Menlo, monospace; font-size: 27px; }
+
+/* 깃허브 화면 흉내 */
+.gh { background: #fff; border: 2px solid #d0d7de; border-radius: 22px; overflow: hidden; }
+.gh .bar { background: #f6f8fa; border-bottom: 2px solid #d0d7de; padding: 18px 26px; font-size: 26px; color: #59636e; display: flex; align-items: center; justify-content: space-between; }
+.gh .bar b { color: #1f2328; }
+.gh .li { display: flex; align-items: center; gap: 18px; padding: 18px 26px; border-bottom: 1px solid #e6e9ec; font-size: 28px; color: #1f2328; }
+.gh .li:last-child { border-bottom: 0; }
+.gh .li.hit { background: #fff8c5; font-weight: 700; }
+.ico { width: 30px; height: 26px; flex: none; }
+.pen { width: 64px; height: 64px; border-radius: 14px; border: 4px solid var(--stop); display: grid; place-items: center; }
+.ring { outline: 5px solid var(--stop); outline-offset: 6px; border-radius: 12px; }
+.code { padding: 26px; font-family: "SF Mono", Menlo, monospace; font-size: 26px; line-height: 1.8; color: #8a919a; }
+.code .keep { color: #b4bac2; }
+.code .txt { color: #1f2328; background: #dafbe1; padding: 2px 6px; border-radius: 6px; font-family: Pretendard, sans-serif; font-weight: 700; font-size: 30px; }
+.btn-gh { display: inline-block; background: var(--gh-green); color: #fff; font-weight: 700; font-size: 30px; padding: 16px 30px; border-radius: 12px; }
+
+/* 흐름 그림 */
+.flow { display: flex; flex-direction: column; gap: 0; }
+.flow .f { display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; background: var(--paper); border: 2px solid var(--line); border-radius: 26px; padding: 26px 32px; }
+.flow .f .k { font-size: 30px; font-weight: 800; color: var(--go); }
+.flow .f p { margin: 0; font-size: 33px; line-height: 1.4; font-weight: 600; }
+.flow .arrow { height: 34px; display: grid; place-items: center; color: var(--sub); }
+
+/* 클로드 대화 흉내 */
+.chat { background: #fff; border: 2px solid var(--line); border-radius: 26px; padding: 30px; display: flex; flex-direction: column; gap: 18px; }
+.chat .me { align-self: flex-end; max-width: 82%; background: #ecebe6; border-radius: 22px; padding: 20px 26px; font-size: 30px; line-height: 1.45; font-weight: 600; }
+.chat .ai { align-self: flex-start; max-width: 86%; font-size: 30px; line-height: 1.45; color: var(--ink); }
+.chat .ai .tag { margin-right: 8px; }
+
+/* 넘겨 보는 슬라이드 */
+.deck-nav { display: none; }
+.deck body { height: 100vh; overflow: hidden; background: #2a2d33; }
+.deck .card.on { position: absolute; left: 50%; top: calc((100vh - 96px) / 2); transform: translate(-50%, -50%) scale(var(--s)); transform-origin: center; }
+.deck .deck-nav { display: flex; position: fixed; left: 0; right: 0; bottom: 0; height: 96px; align-items: center; justify-content: center; gap: 28px; padding: 0 16px env(safe-area-inset-bottom, 0px); }
+.deck-nav button { font: inherit; font-size: 20px; font-weight: 700; color: #16191f; background: #fff; border: 0; border-radius: 999px; padding: 14px 30px; cursor: pointer; }
+.deck-nav button:disabled { opacity: .35; cursor: default; }
+.deck-nav button:focus-visible { outline: 3px solid #5ce5c3; outline-offset: 3px; }
+.deck-nav span { color: #fff; font-size: 18px; font-weight: 600; min-width: 70px; text-align: center; }
+/* PDF: 한 장에 카드 하나 */
+@page { size: 1080px 1350px; margin: 0; }
+.print .card { display: flex; break-after: page; }
+</style>
+</head>
+<body>
+
+<!-- ───────── A. 사이트 고치는 법 ───────── -->
+
+<section class="card" id="a1">
+  <div class="top"><span>달그락 사이트 고치는 법</span><span>1 / 8</span></div>
+  <h1>무엇을 바꾸고<br>싶나요?</h1>
+  <p class="lead">바꾸고 싶은 것에 맞는 방법을 골라요.</p>
+  <div class="steps">
+    <div class="door"><p>글자를 바꾸고 싶어요<span>오타, 문장, 날짜, 숫자</span></p><span class="go">1번 방법</span></div>
+    <div class="door"><p>사진이나 움직임을 바꾸고 싶어요<span>위치, 색, 사진, 넘어가는 모양</span></p><span class="go">2번 방법</span></div>
+    <div class="door"><p>피그마 그림이 바뀌었어요<span>화면 디자인 자체가 달라졌을 때</span></p><span class="go">3번 방법</span></div>
+  </div>
+  <div class="fill"></div>
+  <p class="mid sub">처음이라면 다음 장 "처음 딱 한 번"부터 봐요.</p>
+  <div class="foot">우리 사이트 주소 · dalgeulock.github.io</div>
+</section>
+
+<section class="card" id="a2">
+  <div class="top"><span>달그락 사이트 고치는 법</span><span>2 / 8</span></div>
+  <h1>처음 딱 한 번만<br>준비해요</h1>
+  <p class="lead">깃허브는 우리 사이트 파일이 들어 있는<br>인터넷 서랍이에요. 서랍 열쇠를 받는 단계예요.</p>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p><b>github.com</b> 에 들어가서 가입해요.<small>오른쪽 위 "Sign up" 버튼이에요. 이메일만 있으면 돼요.</small></p></div>
+    <div class="step"><span class="num">2</span><p>내 아이디를 <b>민서</b>에게 알려줘요.<small>민서가 우리 서랍에 들어올 수 있게 초대해 줘요.</small></p></div>
+    <div class="step"><span class="num">3</span><p>메일로 온 초대에서 <b>"Join"</b>을 눌러요.<small>이제 서랍 열쇠가 생겼어요.</small></p></div>
+  </div>
+  <div class="fill"></div>
+  <div class="foot">민서는 서랍 주인이라 1, 3번은 건너뛰어도 돼요.</div>
+</section>
+
+<section class="card" id="a3">
+  <div class="top"><span>1번 방법 · 글자 바꾸기</span><span>3 / 8</span></div>
+  <h1>서랍을 열고<br>페이지를 골라요</h1>
+  <p class="lead">아래 주소로 들어가서 폴더를 두 번 눌러요.</p>
+  <div class="box" style="padding:26px 34px"><p class="mid"><b>github.com/dalgeulock/dalgeulock.github.io</b></p></div>
+  <div class="gh">
+    <div class="bar"><span><b>과정</b> &gt; <b>jsx</b></span><span>폴더 "과정" → "jsx" 순서로 눌러요</span></div>
+    <div class="li"><svg class="ico" viewBox="0 0 30 26"><rect x="2" y="2" width="26" height="22" rx="3" fill="none" stroke="#59636e" stroke-width="2.4"/></svg><span>Component00Home.jsx</span><span class="sub" style="margin-left:auto">첫 화면</span></div>
+    <div class="li hit"><svg class="ico" viewBox="0 0 30 26"><rect x="2" y="2" width="26" height="22" rx="3" fill="none" stroke="#59636e" stroke-width="2.4"/></svg><span>Component01About.jsx</span><span style="margin-left:auto">ABOUT</span></div>
+    <div class="li"><svg class="ico" viewBox="0 0 30 26"><rect x="2" y="2" width="26" height="22" rx="3" fill="none" stroke="#59636e" stroke-width="2.4"/></svg><span>Component02Research.jsx</span><span class="sub" style="margin-left:auto">RESEARCH</span></div>
+    <div class="li"><svg class="ico" viewBox="0 0 30 26"><rect x="2" y="2" width="26" height="22" rx="3" fill="none" stroke="#59636e" stroke-width="2.4"/></svg><span>Component03Experiment.jsx</span><span class="sub" style="margin-left:auto">EXPERIMENT</span></div>
+    <div class="li"><svg class="ico" viewBox="0 0 30 26"><rect x="2" y="2" width="26" height="22" rx="3" fill="none" stroke="#59636e" stroke-width="2.4"/></svg><span>Component04Design….jsx</span><span class="sub" style="margin-left:auto">DESIGN</span></div>
+    <div class="li"><svg class="ico" viewBox="0 0 30 26"><rect x="2" y="2" width="26" height="22" rx="3" fill="none" stroke="#59636e" stroke-width="2.4"/></svg><span>Component05Brand.jsx</span><span class="sub" style="margin-left:auto">BRAND</span></div>
+  </div>
+  <div class="fill"></div>
+  <div class="foot">이름 끝의 영어가 사이트 위 메뉴 이름과 같아요.</div>
+</section>
+
+<section class="card" id="a4">
+  <div class="top"><span>1번 방법 · 글자 바꾸기</span><span>4 / 8</span></div>
+  <h1>연필을 누르고<br>글자만 바꿔요</h1>
+  <div class="row" style="align-items:center">
+    <div class="box" style="flex:0 0 auto; display:flex; align-items:center; gap:26px"><span class="pen"><svg width="34" height="34" viewBox="0 0 34 34"><path d="M6 28l3-9L23 5l6 6-14 14z" fill="none" stroke="#16191f" stroke-width="2.6" stroke-linejoin="round"/></svg></span><p class="mid"><b>오른쪽 위 연필</b>을 눌러요</p></div>
+    <div class="box"><p class="mid"><b>cmd + F</b> 를 누르고<br>바꿀 문장을 찾아요</p></div>
+  </div>
+  <div class="gh">
+    <div class="bar"><span>이렇게 생긴 줄이 보여요</span></div>
+    <div class="code"><span class="keep">&lt;p className="absolute left-[80px] ..."&gt;</span><br><span class="txt">식사 행동에서 식기의 형태로</span><br><span class="keep">&lt;/p&gt;</span></div>
+  </div>
+  <div class="row">
+    <div class="box" style="border-color:var(--go)"><span class="tag">바꿔도 돼요</span><p class="mid" style="margin-top:14px">초록색 칸의 <b>글자</b></p></div>
+    <div class="box" style="border-color:var(--stop)"><span class="tag stop">건드리지 마요</span><p class="mid" style="margin-top:14px">회색 칸의 <b>영어와 기호</b><br>(위치와 크기 정보예요)</p></div>
+  </div>
+  <div class="fill"></div>
+</section>
+
+<section class="card" id="a5">
+  <div class="top"><span>1번 방법 · 글자 바꾸기</span><span>5 / 8</span></div>
+  <h1>저장하고<br>3분만 기다려요</h1>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>초록 버튼을 눌러요.<small style="margin-top:16px"><span class="btn-gh">Commit changes…</span></small></p></div>
+    <div class="step"><span class="num">2</span><p>작은 창이 뜨면 무엇을 고쳤는지 한 줄 쓰고,<br>초록 버튼을 <b>한 번 더</b> 눌러요.<small>예: "ABOUT 제목 오타 고침"</small></p></div>
+    <div class="step"><span class="num">3</span><p>3분 뒤 사이트를 열고 새로고침해요.<small>바뀐 글자가 보이면 끝이에요.</small></p></div>
+  </div>
+  <div class="row">
+    <div class="box"><span class="tag">초록 체크</span><p class="mid" style="margin-top:14px">서랍 위쪽 <b>Actions</b> 칸에 초록 체크가 뜨면 잘 된 거예요.</p></div>
+    <div class="box"><span class="tag stop">빨간 X</span><p class="mid" style="margin-top:14px">회색 칸을 실수로 지웠을 수 있어요. 8장을 봐요.</p></div>
+  </div>
+  <div class="fill"></div>
+</section>
+
+<section class="card" id="a6">
+  <div class="top"><span>2번 방법 · 클로드에게 부탁하기</span><span>6 / 8</span></div>
+  <h1>말로 부탁하면<br><em>클로드</em>가 고쳐 줘요</h1>
+  <p class="lead">클로드는 말로 시키면 컴퓨터 일을 대신 해 주는 AI 도우미예요.</p>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p><b>claude.ai/download</b> 에서 클로드 앱을 깔아요.<small>유료 요금제(Pro)가 있어야 "Code" 칸을 쓸 수 있어요.</small></p></div>
+    <div class="step"><span class="num">2</span><p>앱 위쪽 <b>"Code"</b> 칸을 누르고 이렇게 말해요.</p></div>
+  </div>
+  <div class="say"><span class="who">처음 한 번 이렇게 말해요</span>깃허브 dalgeulock/dalgeulock.github.io 를 내 컴퓨터로 가져와 줘. 그리고 그 안의 "다음 세션 프롬프트" 파일을 읽고 시작해 줘.</div>
+  <div class="say"><span class="who">그다음부터는 이렇게</span>브랜드 페이지 색 견본 순서를 바꿔 줘.</div>
+  <div class="fill"></div>
+  <div class="foot">클로드가 "올려도 될까요?" 하고 물으면, 사이트를 먼저 확인하고 "응"이라고 해요.</div>
+</section>
+
+<section class="card" id="a7">
+  <div class="top"><span>3번 방법 · 피그마가 바뀌었을 때</span><span>7 / 8</span></div>
+  <h1>피그마 먼저 고치고,<br>클로드에게 알려줘요</h1>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>피그마에서 화면을 평소처럼 고쳐요.</p></div>
+    <div class="step"><span class="num">2</span><p>클로드 <b>"Code"</b> 칸에서 이렇게 말해요.</p></div>
+  </div>
+  <div class="say"><span class="who">이렇게 말해요</span>피그마 ABOUT 화면이 바뀌었어. 다시 가져와서 사이트에 반영해 줘.</div>
+  <div class="box">
+    <span class="tag">처음 한 번</span>
+    <p class="mid" style="margin-top:14px">클로드가 피그마를 볼 수 있게 연결해야 해요.<br>방법은 클로드에게 물어보면 돼요.</p>
+  </div>
+  <div class="say"><span class="who">이렇게 물어봐요</span>피그마를 너랑 연결하는 법을 아주 쉽게 알려 줘.</div>
+  <div class="fill"></div>
+</section>
+
+<section class="card" id="a8">
+  <div class="top"><span>같이 쓰는 약속</span><span>8 / 8</span></div>
+  <h1>망가져도 괜찮아요.<br><em>다 되돌릴 수 있어요</em></h1>
+  <p class="lead">깃허브는 예전 모습을 전부 기억하고 있어요.</p>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>고치기 전에 단톡방에 말해요.<small>"ABOUT 고치는 중"처럼요. 둘이 같은 페이지를 동시에 고치면 꼬여요.</small></p></div>
+    <div class="step"><span class="num">2</span><p>고친 뒤엔 꼭 사이트를 열어 봐요.</p></div>
+    <div class="step"><span class="num">3</span><p>이상해졌다면 클로드에게 말해요.</p></div>
+  </div>
+  <div class="say"><span class="who">이렇게 말해요</span>방금 고친 거 때문에 사이트가 이상해. 고치기 전으로 되돌려 줘.</div>
+  <div class="fill"></div>
+  <div class="foot">사이트 · dalgeulock.github.io &nbsp;&nbsp; 서랍 · github.com/dalgeulock</div>
+</section>
+
+<!-- ───────── B. 우리가 한 일, 다음 프로젝트 ───────── -->
+
+<section class="card" id="b1">
+  <div class="top"><span>사이트가 만들어진 이야기</span><span>1 / 6</span></div>
+  <h1>피그마 그림이<br>진짜 사이트가 되기까지</h1>
+  <p class="lead">하루 동안 이렇게 진행됐어요.</p>
+  <div class="flow">
+    <div class="f"><span class="k">1. 그림</span><p>우리 팀이 피그마에 6개 화면을 그렸어요.</p></div>
+    <div class="arrow"><svg width="24" height="30" viewBox="0 0 24 30"><path d="M12 2v24M4 18l8 8 8-8" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></div>
+    <div class="f"><span class="k">2. 옮기기</span><p>클로드가 그림을 읽고, 똑같이 생긴 웹 페이지로 옮겼어요.</p></div>
+    <div class="arrow"><svg width="24" height="30" viewBox="0 0 24 30"><path d="M12 2v24M4 18l8 8 8-8" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></div>
+    <div class="f"><span class="k">3. 움직임</span><p>버튼을 누르면 부드럽게 넘어가도록 움직임을 넣었어요.</p></div>
+    <div class="arrow"><svg width="24" height="30" viewBox="0 0 24 30"><path d="M12 2v24M4 18l8 8 8-8" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></div>
+    <div class="f"><span class="k">4. 다듬기</span><p>"너무 과해" 하는 부분을 덜어 냈어요.</p></div>
+    <div class="arrow"><svg width="24" height="30" viewBox="0 0 24 30"><path d="M12 2v24M4 18l8 8 8-8" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></div>
+    <div class="f"><span class="k">5. 올리기</span><p>깃허브 서랍에 넣었더니 누구나 여는 주소가 생겼어요.</p></div>
+  </div>
+  <div class="fill"></div>
+</section>
+
+<section class="card" id="b2">
+  <div class="top"><span>사이트가 만들어진 이야기</span><span>2 / 6</span></div>
+  <h1>깃허브는<br>무엇인가요?</h1>
+  <p class="lead">인터넷에 있는 <b>우리 팀 공용 서랍</b>이에요.</p>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>파일을 넣어 두고 같이 써요.<small>누구 컴퓨터에서든 같은 파일을 볼 수 있어요.</small></p></div>
+    <div class="step"><span class="num">2</span><p>바뀐 걸 일기처럼 다 적어 둬요.<small>그래서 언제든 예전 모습으로 돌아갈 수 있어요.</small></p></div>
+    <div class="step"><span class="num">3</span><p>서랍 이름을 잘 지으면 서랍이 사이트가 돼요.<small>"dalgeulock.github.io"라고 지어서, 그 이름이 그대로 주소가 됐어요. 돈은 안 들어요.</small></p></div>
+  </div>
+  <div class="fill"></div>
+  <div class="foot">서랍 주인은 민서예요. 은비는 초대받으면 같이 쓸 수 있어요.</div>
+</section>
+
+<section class="card" id="b3">
+  <div class="top"><span>사이트가 만들어진 이야기</span><span>3 / 6</span></div>
+  <h1>훈램은 코딩 대신<br><em>말로 시켰어요</em></h1>
+  <p class="lead">클로드에게 이렇게 말했어요.</p>
+  <div class="chat">
+    <div class="me">이 피그마 페이지를 웹으로 만들어 줘. 버튼을 누르면 부드럽게 넘어가게 해 줘.</div>
+    <div class="ai"><span class="tag">클로드</span>6개 화면을 옮기고, 직접 눌러 보며 확인했어요.</div>
+    <div class="me">너무 커지고 과한 움직임은 빼 줘.</div>
+    <div class="ai"><span class="tag">클로드</span>커지는 움직임을 없애고 이동 거리를 줄였어요.</div>
+    <div class="me">팀이랑 같이 보게 깃허브에 올려 줘.</div>
+    <div class="ai"><span class="tag">클로드</span>올렸어요. 주소는 dalgeulock.github.io 예요.</div>
+  </div>
+  <div class="fill"></div>
+  <div class="foot">클로드가 만들고, 스스로 눌러 보고, 결과를 알려 줬어요.</div>
+</section>
+
+<section class="card" id="b4">
+  <div class="top"><span>다음 프로젝트를 시작할 때</span><span>4 / 6</span></div>
+  <h1>새 사이트도<br>네 걸음이면 돼요</h1>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>피그마에 화면을 다 그려요.<small>화면 이름은 "00 HOME"처럼 순서대로 붙여요.</small></p></div>
+    <div class="step"><span class="num">2</span><p>클로드 "Code" 칸에 피그마 링크를 붙이고 부탁해요.</p></div>
+    <div class="step"><span class="num">3</span><p>만들어지면 직접 눌러 보고, 마음에 안 드는 걸 말로 고쳐요.</p></div>
+    <div class="step"><span class="num">4</span><p>"깃허브에 올려서 주소 만들어 줘"라고 해요.</p></div>
+  </div>
+  <div class="say"><span class="who">2번에서 이렇게 말해요</span>이 피그마를 웹사이트로 만들어 줘. 링크: (피그마 주소). 버튼을 누르면 부드럽게 넘어가게, 과하지 않게 해 줘.</div>
+  <div class="fill"></div>
+</section>
+
+<section class="card" id="b5">
+  <div class="top"><span>다음 프로젝트를 시작할 때</span><span>5 / 6</span></div>
+  <h1>클로드에게<br>잘 부탁하는 법</h1>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>한 번에 하나씩 말해요.</p></div>
+    <div class="step"><span class="num">2</span><p>본 그대로 말해요.<small>"글씨가 작아", "너무 번쩍거려", "여기가 비어 보여"</small></p></div>
+    <div class="step"><span class="num">3</span><p>화면을 찍어서 같이 붙여 넣어요.<small>cmd + shift + 4 로 찍을 수 있어요.</small></p></div>
+    <div class="step"><span class="num">4</span><p>모르는 말이 나오면 되물어요.<small>"그게 무슨 뜻이야? 쉽게 말해 줘"</small></p></div>
+  </div>
+  <div class="fill"></div>
+  <div class="foot">어려운 말은 클로드가 몰라서 쓰는 게 아니에요. 쉽게 해 달라고 하면 돼요.</div>
+</section>
+
+<section class="card" id="b6">
+  <div class="top"><span>다음 프로젝트를 시작할 때</span><span>6 / 6</span></div>
+  <h1>꼭 기억할<br>세 가지</h1>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><p>올리기 전에 내 눈으로 확인해요.<small>클로드가 "올려도 될까요?" 하면, 먼저 화면을 봐요.</small></p></div>
+    <div class="step"><span class="num">2</span><p>비밀번호는 클로드에게 알려주지 않아요.<small>로그인은 내가 직접 해요.</small></p></div>
+    <div class="step"><span class="num">3</span><p>망가져도 걱정하지 않아요.<small>깃허브가 예전 모습을 기억하고 있어요.</small></p></div>
+  </div>
+  <div class="box"><p class="big">막히면 이 한마디면 돼요.</p></div>
+  <div class="say"><span class="who">이렇게 말해요</span>나 지금 뭘 해야 하는지 모르겠어. 한 단계씩 아주 쉽게 알려 줘.</div>
+  <div class="fill"></div>
+</section>
+
+<nav class="deck-nav" aria-label="슬라이드 넘기기">
+  <button type="button" id="prev">이전</button>
+  <span id="count">1 / 14</span>
+  <button type="button" id="next">다음</button>
+</nav>
+<script>
+  // #a1 같은 주소면 그 한 장만(그림 뽑기용), ?print 면 전부(PDF용), 아니면 한 장씩 넘겨 보는 슬라이드
+  const cards = [...document.querySelectorAll('.card')];
+  const id = location.hash.slice(1);
+  if (location.search.includes('print')) {
+    document.documentElement.classList.add('print');
+  } else if (id && document.getElementById(id)) {
+    document.getElementById(id).classList.add('on');
+  } else {
+    document.documentElement.classList.add('deck');
+    let i = 0;
+    const fit = () => document.documentElement.style.setProperty('--s', Math.min(innerWidth / 1080, (innerHeight - 96) / 1350));
+    const go = n => {
+      i = Math.max(0, Math.min(cards.length - 1, n));
+      cards.forEach((c, j) => c.classList.toggle('on', j === i));
+      document.getElementById('count').textContent = `${i + 1} / ${cards.length}`;
+      document.getElementById('prev').disabled = i === 0;
+      document.getElementById('next').disabled = i === cards.length - 1;
+    };
+    fit(); go(0);
+    addEventListener('resize', fit);
+    document.getElementById('prev').onclick = () => go(i - 1);
+    document.getElementById('next').onclick = () => go(i + 1);
+    addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(i + 1);
+      if (e.key === 'ArrowLeft') go(i - 1);
+    });
+    let x0 = null;
+    addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+  }
+</script>
+</body>
+</html>

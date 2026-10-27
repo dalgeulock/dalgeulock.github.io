@@ -2,7 +2,9 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>달그락 팀 안내 그림</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<title>달그락 사이트 안내</title>
 <style>
 :root {
   --bg: #f4f5f3;
@@ -80,6 +82,19 @@ h1 em { font-style: normal; color: var(--go); }
 .chat .me { align-self: flex-end; max-width: 82%; background: #ecebe6; border-radius: 22px; padding: 20px 26px; font-size: 30px; line-height: 1.45; font-weight: 600; }
 .chat .ai { align-self: flex-start; max-width: 86%; font-size: 30px; line-height: 1.45; color: var(--ink); }
 .chat .ai .tag { margin-right: 8px; }
+
+/* 넘겨 보는 슬라이드 */
+.deck-nav { display: none; }
+.deck body { height: 100vh; overflow: hidden; background: #2a2d33; }
+.deck .card.on { position: absolute; left: 50%; top: calc((100vh - 96px) / 2); transform: translate(-50%, -50%) scale(var(--s)); transform-origin: center; }
+.deck .deck-nav { display: flex; position: fixed; left: 0; right: 0; bottom: 0; height: 96px; align-items: center; justify-content: center; gap: 28px; padding: 0 16px env(safe-area-inset-bottom, 0px); }
+.deck-nav button { font: inherit; font-size: 20px; font-weight: 700; color: #16191f; background: #fff; border: 0; border-radius: 999px; padding: 14px 30px; cursor: pointer; }
+.deck-nav button:disabled { opacity: .35; cursor: default; }
+.deck-nav button:focus-visible { outline: 3px solid #5ce5c3; outline-offset: 3px; }
+.deck-nav span { color: #fff; font-size: 18px; font-weight: 600; min-width: 70px; text-align: center; }
+/* PDF: 한 장에 카드 하나 */
+@page { size: 1080px 1350px; margin: 0; }
+.print .card { display: flex; break-after: page; }
 </style>
 </head>
 <body>
@@ -296,9 +311,47 @@ h1 em { font-style: normal; color: var(--go); }
   <div class="fill"></div>
 </section>
 
+<nav class="deck-nav" aria-label="슬라이드 넘기기">
+  <button type="button" id="prev">이전</button>
+  <span id="count">1 / 14</span>
+  <button type="button" id="next">다음</button>
+</nav>
 <script>
-  const id = location.hash.slice(1) || 'a1';
-  document.getElementById(id)?.classList.add('on');
+  // #a1 같은 주소면 그 한 장만(그림 뽑기용), ?print 면 전부(PDF용), 아니면 한 장씩 넘겨 보는 슬라이드
+  const cards = [...document.querySelectorAll('.card')];
+  const id = location.hash.slice(1);
+  if (location.search.includes('print')) {
+    document.documentElement.classList.add('print');
+  } else if (id && document.getElementById(id)) {
+    document.getElementById(id).classList.add('on');
+  } else {
+    document.documentElement.classList.add('deck');
+    let i = 0;
+    const fit = () => document.documentElement.style.setProperty('--s', Math.min(innerWidth / 1080, (innerHeight - 96) / 1350));
+    const go = n => {
+      i = Math.max(0, Math.min(cards.length - 1, n));
+      cards.forEach((c, j) => c.classList.toggle('on', j === i));
+      document.getElementById('count').textContent = `${i + 1} / ${cards.length}`;
+      document.getElementById('prev').disabled = i === 0;
+      document.getElementById('next').disabled = i === cards.length - 1;
+    };
+    fit(); go(0);
+    addEventListener('resize', fit);
+    document.getElementById('prev').onclick = () => go(i - 1);
+    document.getElementById('next').onclick = () => go(i + 1);
+    addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(i + 1);
+      if (e.key === 'ArrowLeft') go(i - 1);
+    });
+    let x0 = null;
+    addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+  }
 </script>
 </body>
 </html>
